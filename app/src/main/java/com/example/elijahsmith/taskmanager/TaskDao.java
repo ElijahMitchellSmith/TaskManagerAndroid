@@ -7,10 +7,9 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import java.util.List;
+@Dao
 
 public interface TaskDao {
-    @Dao
-    public interface VideoGameDao {
 
         //Allow us to get all video games
         @Query("SELECT * FROM Task")
@@ -26,4 +25,4 @@ public interface TaskDao {
         void deleteTask(Task task);
 
     }
-}
+

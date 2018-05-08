@@ -7,6 +7,7 @@ import java.util.Date;
 @Entity
 public class Task {
     @PrimaryKey(autoGenerate = true)
+    private int id;
     private String taskTitle;
     private String description;
     private boolean isComplete;
@@ -16,6 +17,14 @@ public class Task {
         this.taskTitle = taskTitle;
         this.description = description;
         this.date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTaskTitle() {
