@@ -18,6 +18,7 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private AddTaskFragment addTaskFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +46,18 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+    @OnClick(R.id.add_button)
+    protected void addButtonClicked() {
+        addTaskFragment = AddTaskFragment.newInstance();
+        addTaskFragment.attachParent((AddTaskFragment.ActivityCallback) this);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder,addTaskFragment).commit();
 
-    @Override
+
+
+    }
+
+
+        @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -74,6 +85,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -103,8 +115,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    @OnClick(R.id.add_button)
-    protected void addButtonClicked() {
 
     }
-}
+
