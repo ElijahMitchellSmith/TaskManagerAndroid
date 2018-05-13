@@ -12,13 +12,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, AddTaskFragment.ActivityCallback {
     private AddTaskFragment addTaskFragment;
+ //   @BindView(R.menu.activity_main_drawer)
+   // protected Menu drawerMenu;
+    @BindView(R.id.add_task_button)
+    protected Button addTaskButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +34,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -46,18 +44,9 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-    @OnClick(R.id.add_button)
-    protected void addButtonClicked() {
-        addTaskFragment = AddTaskFragment.newInstance();
-        addTaskFragment.attachParent((AddTaskFragment.ActivityCallback) this);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder,addTaskFragment).commit();
 
 
-
-    }
-
-
-        @Override
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -95,6 +84,11 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        if (addTaskButton.isActivated()) {
+            addTaskFragment = AddTaskFragment.newInstance();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder,addTaskFragment).commit();
+        }
+
 
      /*   if (id == R.id.nav_camera) {
             // Handle the camera action
@@ -116,5 +110,14 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+
+    @Override
+    public void addClicked() {
+
     }
+}
+
+
+//xmlns:app="http://schemas.android.com/apk/res-auto"
+//    app:showAsAction="always" />
 

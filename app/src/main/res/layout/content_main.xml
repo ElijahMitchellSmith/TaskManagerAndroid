@@ -9,7 +9,7 @@
     tools:showIn="@layout/app_bar_main">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/incomplete_title_view"
         android:layout_width="0dp"
         android:layout_height="36dp"
         android:text="Incomplete Tasks"

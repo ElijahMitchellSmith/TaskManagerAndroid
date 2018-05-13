@@ -30,6 +30,8 @@ import butterknife.OnClick;
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     private List<Task> taskList;
+    private List<Task> incompleteTasks;
+    private List<Task> completeTasks;
     private AdapterCallback adapterCallback;
 
     public Adapter(List<Task> taskList, AdapterCallback adapterCallback) {
