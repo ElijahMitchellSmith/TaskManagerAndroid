@@ -23,8 +23,6 @@ public class MainActivity extends AppCompatActivity
     private AddTaskFragment addTaskFragment;
  //   @BindView(R.menu.activity_main_drawer)
    // protected Menu drawerMenu;
-    @BindView(R.id.add_task_button)
-    protected Button addTaskButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,10 +82,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (addTaskButton.isActivated()) {
-            addTaskFragment = AddTaskFragment.newInstance();
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder,addTaskFragment).commit();
-        }
 
 
      /*   if (id == R.id.nav_camera) {
@@ -108,6 +102,13 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    @OnClick(R.id.add_task_fab)
+    public void addTask() {
+        addTaskFragment = AddTaskFragment.newInstance();
+        addTaskFragment.attachParent(this);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_holder,addTaskFragment).commit();
+
     }
 
 
