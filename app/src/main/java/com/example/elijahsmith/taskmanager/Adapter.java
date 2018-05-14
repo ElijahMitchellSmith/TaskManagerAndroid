@@ -114,7 +114,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         public void bindTask(Task task) {
 
             taskTitle.setText(task.getTaskTitle());
-         //   genre.setText(adapterCallback.getContext().getString(R.string.game_genre, game.getGameGenre()));
 
             if (task.isComplete()) {
                 //make due date visible
@@ -130,7 +129,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);
                 Date date = calendar.getTime();
                 SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
-                taskDate.setText(adapterCallback.getContext().getString(R.string.due_date, formatter.format(date)));
+//                taskDate.setText(adapterCallback.getContext().getString(R.string.due_date, formatter.format(date)));
 
             } else {
                 taskDate.setVisibility(View.INVISIBLE);
