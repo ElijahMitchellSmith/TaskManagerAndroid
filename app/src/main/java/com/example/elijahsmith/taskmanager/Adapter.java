@@ -32,10 +32,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private List<Task> taskList;
     private List<Task> incompleteTasks;
     private List<Task> completeTasks;
-    private AdapterCallback adapterCallback;
+    private static AdapterCallback adapterCallback;
 
     public Adapter(List<Task> taskList, AdapterCallback adapterCallback) {
-        this.taskList= taskList;
+        this.incompleteTasks= taskList;
         this.adapterCallback = adapterCallback;
 
     }
@@ -51,26 +51,26 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bindTask(taskList.get(position));
+        holder.bindTask(incompleteTasks.get(position));
 
         //TODO - Set up onClicks for deleting and checking out
-        holder.itemView.setOnClickListener(holder.onClick(taskList.get(position)));
-        holder.itemView.setOnLongClickListener(holder.onLongClick(taskList.get(position)));
+        holder.itemView.setOnClickListener(holder.onClick(incompleteTasks.get(position)));
+        holder.itemView.setOnLongClickListener(holder.onLongClick(incompleteTasks.get(position)));
 
     }
 
     @Override
     public int getItemCount() {
 
-        return taskList.size();
+        return incompleteTasks.size();
     }
 
     public void updateList(List<Task> list) {
-        taskList = list;
+        incompleteTasks = list;
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         //TODO - Create ViewHolder Variables and methods
         @BindView(R.id.item_layout)
         protected ConstraintLayout rowlayout;
@@ -93,6 +93,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             return new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     adapterCallback.rowClicked(task);
                 }
             };
@@ -112,10 +113,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
 
         public void bindTask(Task task) {
-
             taskTitle.setText(task.getTaskTitle());
 
+
+
             if (task.isComplete()) {
+                taskTitle.setText(task.getTaskTitle());
                 //make due date visible
                 taskDate.setVisibility(View.VISIBLE);
                 //show day game was checked out
@@ -129,7 +132,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);
                 Date date = calendar.getTime();
                 SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
-//                taskDate.setText(adapterCallback.getContext().getString(R.string.due_date, formatter.format(date)));
+     //           taskDate.setText(adapterCallback.getContext().getString(R.string.due_date, formatter.format(date)));
 
             } else {
                 taskDate.setVisibility(View.INVISIBLE);
