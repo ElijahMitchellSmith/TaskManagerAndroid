@@ -109,7 +109,7 @@ public class AdapterTwoElectricBoogaloo extends RecyclerView.Adapter<Adapter.Vie
                 //make due date visible
                 taskDate.setVisibility(View.VISIBLE);
                 //show day game was checked out
-                task.setDate(new Date());
+                task.setDate(taskDate.getText().toString());
                 //change background color
                 rowlayout.setBackgroundResource(R.color.red);
                 //calculate check in date

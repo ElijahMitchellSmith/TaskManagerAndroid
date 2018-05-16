@@ -25,6 +25,8 @@ public class AddTaskFragment extends Fragment {
     protected EditText taskTitle;
     @BindView(R.id.task_description_edit)
     protected EditText taskDescription;
+    @BindView(R.id.task_date_edit)
+    protected EditText taskDate;
 
     @Nullable
     @Override
@@ -53,18 +55,19 @@ public class AddTaskFragment extends Fragment {
     }
     @OnClick(R.id.add_task_button)
     protected void addButtonClicked() {
-        if (taskTitle.getText().toString().isEmpty() || taskDescription.getText().toString().isEmpty()) {
+        if (taskTitle.getText().toString().isEmpty() || taskDescription.getText().toString().isEmpty() || taskDate.getText().toString().isEmpty()) {
             Toast.makeText(getActivity(), "All Fields Are Required", Toast.LENGTH_LONG).show();
         } else {
             String title = taskTitle.getText().toString();
             String description = taskDescription.getText().toString();
-            addTaskToDatabase(title, description);
+            String date = taskDate.getText().toString();
+            addTaskToDatabase(title, description, date);
             Toast.makeText(getActivity(), "Task Added!", Toast.LENGTH_LONG).show();
 
         }
     }
-    private void addTaskToDatabase(final String title, final String description) {
-        Task task = new Task(title,description,new Date());
+    private void addTaskToDatabase(final String title, final String description,final String date) {
+        Task task = new Task(title,description,date);
         taskDatabase.taskDao().addTask(task);
         activityCallback.addClicked();
 

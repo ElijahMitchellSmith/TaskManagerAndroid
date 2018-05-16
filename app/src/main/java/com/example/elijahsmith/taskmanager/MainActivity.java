@@ -18,9 +18,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,8 +33,7 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, AddTaskFragment.ActivityCallback, Adapter.AdapterCallback {
-    private List<Task> incompleteTasks;
-    private List<Task> completeTasks;
+    private Task task;
     private AddTaskFragment addTaskFragment;
     private int position;
     private Adapter adapter;
@@ -43,9 +47,10 @@ public class MainActivity extends AppCompatActivity
     protected RecyclerView completeRecycler;
     private LinearLayoutManager linearLayoutManager;
     @BindView(R.id.add_task_fab)
+    protected AdapterTwoElectricBoogaloo.AdapterCallback adapterCallback;
     protected FloatingActionButton addButton;
-    //   @BindView(R.menu.activity_main_drawer)
-    // protected Menu drawerMenu;
+    @BindView(R.id.date_text)
+    protected TextView taskDate;
 
     @Override
     protected void onStart() {
@@ -164,6 +169,13 @@ public class MainActivity extends AppCompatActivity
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         adapter = new Adapter(taskDatabase.taskDao().getTasks(), this);
+        int numberOfDays = 14;
+//        Calendar calendar = Calendar.getInstance();
+  //      calendar.setTime(task.getDate());
+    //    calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);
+      //  Date date = calendar.getTime();
+//        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+        taskDate.setText(adapterCallback.getContext().getString(R.string.due_date));
         incompleteRecycler.setLayoutManager(linearLayoutManager);
         incompleteRecycler.setAdapter(adapter);
         adapter.notifyDataSetChanged();

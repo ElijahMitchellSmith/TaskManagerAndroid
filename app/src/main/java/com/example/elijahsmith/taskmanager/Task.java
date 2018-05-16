@@ -11,9 +11,9 @@ public class Task {
     private String taskTitle;
     private String description;
     private boolean isComplete;
-    private Date date;
+    private String date;
 
-    public Task(String taskTitle, String description, Date date) {
+    public Task(String taskTitle, String description, String date) {
         this.taskTitle = taskTitle;
         this.description = description;
         this.date = date;
@@ -51,12 +51,11 @@ public class Task {
         isComplete = complete;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }
-

@@ -124,15 +124,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 //make due date visible
                 dateTask.setVisibility(View.VISIBLE);
                 //show day game was checked out
-                task.setDate(new Date());
+                task.setDate(dateTask.getText().toString());
                 //change background color
                 rowlayout.setBackgroundResource(R.color.red);
                 //calculate check in date
-                int numberOfDays = 14;
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(task.getDate());
-                calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);
-                Date date = calendar.getTime();
+//                int numberOfDays = 14;
+  //              Calendar calendar = Calendar.getInstance();
+    //            calendar.setTime(task.getDate());
+      //          calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);
+        //        Date date = calendar.getTime();
                 SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
 //                dateTask.setText(adapterCallback.getContext().getString(R.string.due_date,formatter.format(date)));
 
