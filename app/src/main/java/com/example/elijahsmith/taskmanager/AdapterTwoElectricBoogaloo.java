@@ -113,13 +113,7 @@ public class AdapterTwoElectricBoogaloo extends RecyclerView.Adapter<Adapter.Vie
                 //change background color
                 rowlayout.setBackgroundResource(R.color.red);
                 //calculate check in date
-                int numberOfDays = 14;
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(task.getDate());
-                calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);
-                Date date = calendar.getTime();
-                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
-                taskDate.setText(adapterCallback.getContext().getString(R.string.due_date, formatter.format(date)));
+
 
             } else {
                 taskDate.setVisibility(View.INVISIBLE);

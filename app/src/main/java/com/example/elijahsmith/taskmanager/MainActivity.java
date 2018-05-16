@@ -20,13 +20,18 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, AddTaskFragment.ActivityCallback, Adapter.AdapterCallback {
+    private List<Task> incompleteTasks;
+    private List<Task> completeTasks;
     private AddTaskFragment addTaskFragment;
+    private int position;
     private Adapter adapter;
     private AdapterTwoElectricBoogaloo adapterTwoElectricBoogaloo;
     private TaskDatabase taskDatabase;
@@ -37,6 +42,8 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.complete_tasks_recyclerview)
     protected RecyclerView completeRecycler;
     private LinearLayoutManager linearLayoutManager;
+    @BindView(R.id.add_task_fab)
+    protected FloatingActionButton addButton;
     //   @BindView(R.menu.activity_main_drawer)
     // protected Menu drawerMenu;
 
@@ -143,9 +150,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void addClicked() {
+
             getSupportFragmentManager().beginTransaction().remove(addTaskFragment).commit();
+            addButton.setVisibility(View.INVISIBLE);
             adapter.updateList(taskDatabase.taskDao().getTasks());
-            adapterTwoElectricBoogaloo.updateList(taskDatabase.taskDao().getTasks());
+            adapterTwoElectricBoogaloo.updateList(taskDatabaseTwoElectricBoogaloo.taskDao().getTasks());
 
 
         }
@@ -215,6 +224,10 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         task.setComplete(true);
+                        task.getTaskTitle();
+                        task.getDescription();
+                        taskDatabaseTwoElectricBoogaloo.taskDao().addTask(task);
+                        taskDatabase.taskDao().deleteTask(task);
                         taskDatabase.taskDao().updateTasks(task);
                         taskDatabaseTwoElectricBoogaloo.taskDao().updateTasks(task);
                         //let our adapter know that information in the database has changed to update our view accordingly

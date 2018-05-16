@@ -33,6 +33,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     private List<Task> incompleteTasks;
     private List<Task> completeTasks;
     private static AdapterCallback adapterCallback;
+    @BindView(R.id.date_text)
+    protected TextView dateTask;
 
     public Adapter(List<Task> taskList, AdapterCallback adapterCallback) {
         this.incompleteTasks= taskList;
@@ -79,7 +81,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
       //  @BindView(R.id.item_genre)
       //  protected TextView genre;
         @BindView(R.id.date_text)
-        protected TextView taskDate;
+        protected TextView dateTask;
 
 
         public ViewHolder(View itemView) {
@@ -120,7 +122,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             if (task.isComplete()) {
                 taskTitle.setText(task.getTaskTitle());
                 //make due date visible
-                taskDate.setVisibility(View.VISIBLE);
+                dateTask.setVisibility(View.VISIBLE);
                 //show day game was checked out
                 task.setDate(new Date());
                 //change background color
@@ -132,10 +134,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);
                 Date date = calendar.getTime();
                 SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
-     //           taskDate.setText(adapterCallback.getContext().getString(R.string.due_date, formatter.format(date)));
+//                dateTask.setText(adapterCallback.getContext().getString(R.string.due_date,formatter.format(date)));
 
             } else {
-                taskDate.setVisibility(View.INVISIBLE);
+                dateTask.setVisibility(View.INVISIBLE);
                 rowlayout.setBackgroundResource(R.color.green);
             }
 
