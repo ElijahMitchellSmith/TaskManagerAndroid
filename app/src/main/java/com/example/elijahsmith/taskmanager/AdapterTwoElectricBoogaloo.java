@@ -124,8 +124,8 @@ public class AdapterTwoElectricBoogaloo extends RecyclerView.Adapter<Adapter.Vie
     }
 
 
-    public interface AdapterCallback {
-        //TODO:Create callback methods needed
+   public interface AdapterCallback {
+       //TODO:Create callback methods needed
         Context getContext();
 
         void rowClicked(Task task);
