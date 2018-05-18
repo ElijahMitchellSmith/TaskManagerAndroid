@@ -69,7 +69,7 @@ public class AdapterTwoElectricBoogaloo extends RecyclerView.Adapter<Adapter.Vie
         protected TextView taskTitle;
         //  @BindView(R.id.item_genre)
         //  protected TextView genre;
-        @BindView(R.id.date_text)
+        @BindView(R.id.date_textview)
         protected TextView taskDate;
 
 
@@ -109,7 +109,7 @@ public class AdapterTwoElectricBoogaloo extends RecyclerView.Adapter<Adapter.Vie
                 //make due date visible
                 taskDate.setVisibility(View.VISIBLE);
                 //show day game was checked out
-                task.setDate(taskDate.getText().toString());
+//                task.setDate(new Date());
                 //change background color
                 rowlayout.setBackgroundResource(R.color.red);
                 //calculate check in date
@@ -124,8 +124,8 @@ public class AdapterTwoElectricBoogaloo extends RecyclerView.Adapter<Adapter.Vie
     }
 
 
-   public interface AdapterCallback {
-       //TODO:Create callback methods needed
+    public interface AdapterCallback {
+        //TODO:Create callback methods needed
         Context getContext();
 
         void rowClicked(Task task);
@@ -134,4 +134,3 @@ public class AdapterTwoElectricBoogaloo extends RecyclerView.Adapter<Adapter.Vie
         void rowLongClicked(Task task);
     }
 }
-
