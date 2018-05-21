@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -71,6 +72,8 @@ public class AdapterTwoElectricBoogaloo extends RecyclerView.Adapter<Adapter.Vie
         //  protected TextView genre;
         @BindView(R.id.date_textview)
         protected TextView taskDate;
+        @BindView(R.id.task_date_edit)
+        protected EditText dateEdit;
 
 
         public ViewHolder(View itemView) {
@@ -116,7 +119,7 @@ public class AdapterTwoElectricBoogaloo extends RecyclerView.Adapter<Adapter.Vie
 
 
             } else {
-                taskDate.setVisibility(View.INVISIBLE);
+                taskDate.setText(dateEdit.getText());
                 rowlayout.setBackgroundResource(R.color.green);
             }
 
